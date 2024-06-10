@@ -1,9 +1,13 @@
-// ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers
+// ignore_for_file: file_names, avoid_unnecessary_containers, prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace
 
 import 'dart:async';
 
+import 'package:ecomerce/controllers/get_user_data_controller.dart';
+import 'package:ecomerce/screens/admin-panel/admin_main_screen.dart';
 import 'package:ecomerce/screens/auth-ui/welcome_screen.dart';
+import 'package:ecomerce/screens/user-panel/main_screen.dart';
 import 'package:ecomerce/utils/app_constant.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -16,12 +20,29 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  User? user = FirebaseAuth.instance.currentUser;
   @override
   void initState() {
     super.initState();
     Timer(Duration(seconds: 3), () {
-      Get.offAll(() => WelcomeScreen());
+      loggdin(context);
     });
+  }
+
+  Future<void> loggdin(BuildContext context) async {
+    if (user != null) {
+      final GetUserDataController getUserDataController =
+          Get.put(GetUserDataController());
+      var userData = await getUserDataController.getUserData(user!.uid);
+
+      if (userData[0]['isAdmin'] == true) {
+        Get.offAll(() => AdminMainScreen());
+      } else {
+        Get.offAll(() => MainScreen());
+      }
+    } else {
+      Get.to(() => WelcomeScreen());
+    }
   }
 
   @override
@@ -38,6 +59,8 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             Expanded(
               child: Container(
+                width: Get.width,
+                alignment: Alignment.center,
                 child: Lottie.asset('assets/images/splash_icon.json'),
               ),
             ),
