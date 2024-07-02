@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers, file_names, unused_local_variable
+// ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers
 
 import 'package:ecomerce/screens/auth-ui/sign_in_screen.dart';
 import 'package:ecomerce/utils/app_constant.dart';
@@ -8,6 +8,7 @@ import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/sign_up_controller.dart';
+import '../../controllers/get_device_token_controller.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -18,6 +19,9 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final SignUpController signUpController = Get.put(SignUpController());
+  final GetDeviceTokenController getDeviceTokenController =
+      Get.put(GetDeviceTokenController());
+
   TextEditingController username = TextEditingController();
   TextEditingController userEmail = TextEditingController();
   TextEditingController userPhone = TextEditingController();
@@ -190,7 +194,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         String phone = userPhone.text.trim();
                         String city = userCity.text.trim();
                         String password = userPassword.text.trim();
-                        String userDeviceToken = '';
 
                         if (name.isEmpty ||
                             email.isEmpty ||
@@ -205,6 +208,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             colorText: AppConstant.appTextColor,
                           );
                         } else {
+                          // Fetch the device token
+                          String? userDeviceToken =
+                              await getDeviceTokenController.fetchDeviceToken();
+
                           UserCredential? userCredential =
                               await signUpController.signUpMethod(
                             name,
@@ -212,7 +219,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             phone,
                             city,
                             password,
-                            userDeviceToken,
+                            userDeviceToken ?? '',
                           );
 
                           if (userCredential != null) {

@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:ecomerce/screens/user-panel/cart_screen.dart';
 import 'package:ecomerce/utils/app_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,7 +18,17 @@ class MainScreen extends StatelessWidget {
         backgroundColor: AppConstant.appMainColor,
         title: Text(AppConstant.appMainName),
         centerTitle: true,
+        
         actions: [
+          GestureDetector(
+            onTap: () => Get.to(() => CartScreen()),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(
+                Icons.shopping_cart,
+                ),
+            ),
+          ),
           GestureDetector(
             onTap: () => Get.offAll(() => SignInScreen()),
             child: Padding(

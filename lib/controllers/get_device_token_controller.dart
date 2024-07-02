@@ -1,8 +1,5 @@
-// ignore_for_file: file_names, unnecessary_overrides, unused_local_variable, avoid_print
-
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
-
 import '../utils/app_constant.dart';
 
 class GetDeviceTokenController extends GetxController {
@@ -20,10 +17,13 @@ class GetDeviceTokenController extends GetxController {
 
       if (token != null) {
         deviceToken = token;
-        print("token : $deviceToken");
+        print("Device Token: $deviceToken");
         update();
+      } else {
+        print("Failed to get device token.");
       }
     } catch (e) {
+      print("Error fetching device token: $e");
       Get.snackbar(
         "Error",
         "$e",
@@ -32,5 +32,12 @@ class GetDeviceTokenController extends GetxController {
         colorText: AppConstant.appTextColor,
       );
     }
+  }
+
+  Future<String?> fetchDeviceToken() async {
+    if (deviceToken == null) {
+      await getDeviceToken();
+    }
+    return deviceToken;
   }
 }

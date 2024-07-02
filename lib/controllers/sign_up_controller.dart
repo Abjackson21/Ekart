@@ -1,5 +1,3 @@
-// ignore_for_file: body_might_complete_normally_nullable
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecomerce/models/user_models.dart';
 import 'package:ecomerce/utils/app_constant.dart';
@@ -13,7 +11,7 @@ class SignUpController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  //for password visibilty
+  // For password visibility
   var isPasswordVisible = false.obs;
 
   Future<UserCredential?> signUpMethod(
@@ -24,9 +22,6 @@ class SignUpController extends GetxController {
     String userPassword,
     String userDeviceToken,
   ) async {
-    final GetDeviceTokenController getDeviceTokenController =
-        Get.put(GetDeviceTokenController());
-
     try {
       EasyLoading.show(status: "Please wait");
       UserCredential userCredential =
@@ -35,7 +30,7 @@ class SignUpController extends GetxController {
         password: userPassword,
       );
 
-      // send email verification
+      // Send email verification
       await userCredential.user!.sendEmailVerification();
 
       UserModel userModel = UserModel(
@@ -44,7 +39,7 @@ class SignUpController extends GetxController {
         email: userEmail,
         phone: userPhone,
         userImg: '',
-        userDeviceToken: getDeviceTokenController.deviceToken.toString(),
+        userDeviceToken: userDeviceToken, // Pass the device token directly
         country: '',
         userAddress: '',
         street: '',
@@ -54,11 +49,12 @@ class SignUpController extends GetxController {
         city: userCity,
       );
 
-      // add data into database
-      _firestore
+      // Add data into database
+      await _firestore
           .collection('users')
           .doc(userCredential.user!.uid)
           .set(userModel.toMap());
+
       EasyLoading.dismiss();
       return userCredential;
     } on FirebaseAuthException catch (e) {
@@ -70,6 +66,10 @@ class SignUpController extends GetxController {
         backgroundColor: AppConstant.appSecondaryColor,
         colorText: AppConstant.appTextColor,
       );
+    } catch (error) {
+      EasyLoading.dismiss();
+      print("An unexpected error occurred: $error");
     }
+    return null;
   }
 }

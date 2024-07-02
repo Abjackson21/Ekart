@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../screens/auth-ui/welcome_screen.dart';
+import '../screens/user-panel/all_order_screen.dart';
 import '../screens/user-panel/profile_screen.dart';
 
 class DrawerWidget extends StatefulWidget {
@@ -134,7 +135,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 ),
                 onTap: () {
                   Get.back();
-                  // Get.to(() => AllOrdersScreen());
+                  Get.to(() => AllOrdersScreen());
                 },
               ),
             ),

@@ -44,8 +44,8 @@ class WelcomeScreen extends StatelessWidget {
             ),
             Material(
               child: Container(
-                width: Get.width / 1.3,
-                height: Get.height / 1.2,
+                width: Get.width / 1.4,
+                height: Get.height / 12,
                 decoration: BoxDecoration(
                   color: AppConstant.appMainColor,
                   borderRadius: BorderRadius.circular(20.0),
@@ -67,7 +67,7 @@ class WelcomeScreen extends StatelessWidget {
             Material(
               child: Container(
                 width: Get.width / 1.4,
-                height: Get.height / 1.2,
+                height: Get.height / 12,
                 decoration: BoxDecoration(
                   color: AppConstant.appMainColor,
                   borderRadius: BorderRadius.circular(20.0),
