@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_import, must_be_immutable, prefer_interpolation_to_compose_strings, prefer_const_constructors
+
 import 'package:ecomerce/models/order_model.dart';
 import 'package:ecomerce/utils/app_constant.dart';
 import 'package:flutter/cupertino.dart';
