@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecomerce/models/user_models.dart';
 import 'package:ecomerce/utils/app_constant.dart';
@@ -5,7 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
-import 'get_device_token_controller.dart';
+//import 'get_device_token_controller.dart';
 
 class SignUpController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -39,7 +41,7 @@ class SignUpController extends GetxController {
         email: userEmail,
         phone: userPhone,
         userImg: '',
-        userDeviceToken: userDeviceToken, // Pass the device token directly
+        userDeviceToken: '', // Pass the device token directly
         country: '',
         userAddress: '',
         street: '',

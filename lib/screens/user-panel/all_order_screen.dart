@@ -8,14 +8,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controllers/cart_price_controller.dart';
 
-class AllOrdersScreen extends StatefulWidget {
-  const AllOrdersScreen({super.key});
+class AllOrderScreen extends StatefulWidget {
+  const AllOrderScreen({super.key});
 
   @override
-  State<AllOrdersScreen> createState() => _AllOrdersScreenState();
+  State<AllOrderScreen> createState() => _AllOrderScreenState();
 }
 
-class _AllOrdersScreenState extends State<AllOrdersScreen> {
+class _AllOrderScreenState extends State<AllOrderScreen> {
   User? user = FirebaseAuth.instance.currentUser;
   final ProductPriceController productPriceController =
       Get.put(ProductPriceController());
@@ -63,14 +63,10 @@ class _AllOrdersScreenState extends State<AllOrdersScreen> {
                   final productData = snapshot.data!.docs[index];
                   OrderModel orderModel = OrderModel(
                     productId: productData['productId'],
-                    categoryId: productData['categoryId'],
                     productName: productData['productName'],
-                    categoryName: productData['categoryName'],
-                    salePrice: productData['salePrice'],
                     fullPrice: productData['fullPrice'],
                     productImages: productData['productImages'],
                     deliveryTime: productData['deliveryTime'],
-                    isSale: productData['isSale'],
                     productDescription: productData['productDescription'],
                     createdAt: productData['createdAt'],
                     updatedAt: productData['updatedAt'],

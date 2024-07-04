@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, sort_child_properties_last, prefer_const_constructors, unused_local_variable, must_be_immutable, avoid_print, unnecessary_string_interpolations, deprecated_member_use, unused_element, unnecessary_null_comparison
+// ignore_for_file: file_names, sort_child_properties_last, prefer_const_constructors, unused_local_variable, must_be_immutable, avoid_print, unnecessary_string_interpolations, deprecated_member_use, unused_element, unnecessary_null_comparison, no_leading_underscores_for_local_identifiers
 
 import 'package:ecomerce/screens/admin-panel/admin_main_screen.dart';
 import 'package:ecomerce/screens/admin-panel/all_products_screen.dart';
@@ -7,7 +7,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
+import '../screens/admin-panel/all_users_screen.dart';
+import '../screens/auth-ui/welcome_screen.dart';
+import '../screens/admin-panel/all_orders_screen.dart';
 
 class DrawerWidget extends StatefulWidget {
   const DrawerWidget({
@@ -94,7 +96,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                       title: Text(
                         "Guest",
                         style: TextStyle(color: AppConstant.appTextColor),
-                      ),                     
+                      ),
                       leading: CircleAvatar(
                         radius: 22.0,
                         backgroundColor: AppConstant.appMainColor,
@@ -131,6 +133,38 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: ListTile(
                 onTap: () {
+                  Get.to(() => AllUsersScreen());
+                },
+                title: Text(
+                  'Users',
+                  style: TextStyle(color: Colors.white),
+                ),
+                leading: Icon(
+                  Icons.person,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: ListTile(
+                onTap: () {
+                  Get.to(() => AllOrdersScreen());
+                },
+                title: Text(
+                  'Orders',
+                  style: TextStyle(color: Colors.white),
+                ),
+                leading: Icon(
+                  Icons.shopping_bag,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: ListTile(
+                onTap: () {
                   Get.back();
                   Get.to(() => AllProductsScreen());
                 },
@@ -158,6 +192,9 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   //   Get.back();
                   //   await googleSignInController.signInWithGoogle();
                   // }
+                  FirebaseAuth _auth = FirebaseAuth.instance;
+                  await _auth.signOut();
+                  Get.offAll(() => WelcomeScreen());
                 },
                 title: Text(
                   user != null ? 'Logout' : 'Login',

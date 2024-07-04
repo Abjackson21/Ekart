@@ -66,14 +66,10 @@ class _CartScreenState extends State<CartScreen> {
                   final productData = snapshot.data!.docs[index];
                   CartModel cartModel = CartModel(
                     productId: productData['productId'],
-                    categoryId: productData['categoryId'],
                     productName: productData['productName'],
-                    categoryName: productData['categoryName'],
-                    salePrice: productData['salePrice'],
                     fullPrice: productData['fullPrice'],
                     productImages: productData['productImages'],
                     deliveryTime: productData['deliveryTime'],
-                    isSale: productData['isSale'],
                     productDescription: productData['productDescription'],
                     createdAt: productData['createdAt'],
                     updatedAt: productData['updatedAt'],
@@ -190,7 +186,7 @@ class _CartScreenState extends State<CartScreen> {
           children: [
             Obx(
               () => Text(
-                " Total ${productPriceController.totalPrice.value.toStringAsFixed(1)} : PKR",
+                " Total ${productPriceController.totalPrice.value.toStringAsFixed(1)} : RM",
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ),

@@ -37,18 +37,14 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               child: ListTile(
                 titleAlignment: ListTileTitleAlignment.center,
                 title: Text(
-                  "Waris",
-                  style: TextStyle(color: AppConstant.appTextColor),
-                ),
-                subtitle: Text(
-                  "Version 1.0.1",
+                  "Ekart",
                   style: TextStyle(color: AppConstant.appTextColor),
                 ),
                 leading: CircleAvatar(
                   radius: 22.0,
                   backgroundColor: AppConstant.appMainColor,
                   child: Text(
-                    "W",
+                    "Ekart",
                     style: TextStyle(color: AppConstant.appTextColor),
                   ),
                 ),
@@ -72,10 +68,6 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   Icons.home,
                   color: AppConstant.appTextColor,
                 ),
-                trailing: Icon(
-                  Icons.arrow_forward,
-                  color: AppConstant.appTextColor,
-                ),
               ),
             ),
             Padding(
@@ -93,28 +85,6 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   Icons.person,
                   color: AppConstant.appTextColor,
                 ),
-                trailing: Icon(
-                  Icons.arrow_forward,
-                  color: AppConstant.appTextColor,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: ListTile(
-                titleAlignment: ListTileTitleAlignment.center,
-                title: Text(
-                  "Products",
-                  style: TextStyle(color: AppConstant.appTextColor),
-                ),
-                leading: Icon(
-                  Icons.production_quantity_limits,
-                  color: AppConstant.appTextColor,
-                ),
-                trailing: Icon(
-                  Icons.arrow_forward,
-                  color: AppConstant.appTextColor,
-                ),
               ),
             ),
             Padding(
@@ -129,32 +99,10 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   Icons.shopping_bag,
                   color: AppConstant.appTextColor,
                 ),
-                trailing: Icon(
-                  Icons.arrow_forward,
-                  color: AppConstant.appTextColor,
-                ),
                 onTap: () {
                   Get.back();
-                  Get.to(() => AllOrdersScreen());
+                  Get.to(() => AllOrderScreen());
                 },
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: ListTile(
-                titleAlignment: ListTileTitleAlignment.center,
-                title: Text(
-                  "Contact",
-                  style: TextStyle(color: AppConstant.appTextColor),
-                ),
-                leading: Icon(
-                  Icons.help,
-                  color: AppConstant.appTextColor,
-                ),
-                trailing: Icon(
-                  Icons.arrow_forward,
-                  color: AppConstant.appTextColor,
-                ),
               ),
             ),
             Padding(
@@ -172,10 +120,6 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 ),
                 leading: Icon(
                   Icons.logout,
-                  color: AppConstant.appTextColor,
-                ),
-                trailing: Icon(
-                  Icons.arrow_forward,
                   color: AppConstant.appTextColor,
                 ),
               ),
